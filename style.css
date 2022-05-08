@@ -157,6 +157,89 @@ input::placeholder {
     text-decoration: underline;
 }
 
+.logo {
+    display: inline-block;
+    width: 18%;
+}
+
+.logo hr {
+    display: block;
+    margin-top: 2%;
+    margin-left: 6%;
+    width: 60%;
+    opacity: 12%;
+}
+
+.logo-wrapper {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8%;
+}
+
+.search {
+    display: inline-block;
+    position: relative;
+    top: -20px;
+    width: 20%;
+    height: 32px;
+    line-height: 42px;
+    margin-left: 4%;
+}
+
+.search input {
+    width: 80%;
+    border-radius: 16px;
+    padding: 12px 2rem;
+    border: none;
+    box-shadow: inset 0px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.search button {
+    display: inline-block;
+    position: absolute;
+    height: 42px;
+    width: 28%;
+    border-radius: 16px;
+    border: none;
+    background-color: #2B3FFF;
+    color: #fff;
+    font-weight: 600;
+    left: 280px;
+}
+
+.small-profile {
+    float: right;
+    width: 20%;
+}
+
+.small-profile-img-wrap {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+    margin-top: 4%;
+    overflow: hidden;
+}
+
+.small-profile img {
+    width: 100%;
+}
+
+.small-profile h3 {
+    display: inline-block;
+    position: relative;
+    top: -42px;
+    margin-left: 2%;
+}
+
+.small-profile p {
+    display: block;
+    position: relative;
+    top: -32px;
+    margin-left: 20%;
+}
+
 @media screen and (max-width: 375px) {
     .map-link {
         margin-top: 14%;
