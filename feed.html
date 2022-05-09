@@ -29,17 +29,137 @@
             </div>
             <h3>Имя Фамилия</h3>
             <p>Должность</p>
-            <div class="dropdown-btn">
-                <img src="" alt="">
+            <!-- <div class="change-arrows">
+                <button onclick="showDrop('drop-menu')" id="drop-btn"><img src="img/arrows.svg" alt=""></a></button>
             </div>
+            <div id="drop-menu" class="dropdown ">
+                <div class="dropdown-wrapper">
+                    <div class="change-company drop-company">
+                        <div class="change-img-wrapper ">
+                            <img src="img/avatars/jorik.jpg " alt=" ">
+                        </div>
+                        <h3>Yandex</h3>
+                    </div>
+                    <div class="change-company drop-company">
+                        <div class="change-img-wrapper ">
+                            <img src="img/avatars/jorik.jpg " alt=" ">
+                        </div>
+                        <h3>Company Name</h3>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </header>
     <main>
+        <nav class="left-side-menu">
+            <div class="change-arrows">
+                <button onclick="showDrop('drop-menu')" id="drop-btn"><img src="img/arrows.svg" alt=""></a></button>
+            </div>
+            <div class="change-company">
+                <div class="change-img-wrapper">
+                    <img src="img/avatars/jorik.jpg" alt="">
+                </div>
+                <h3>Drake INC</h3>
 
+            </div>
+            <div id="drop-menu" class="dropdown ">
+                <div class="dropdown-wrapper">
+                    <div class="change-company drop-company">
+                        <div class="change-img-wrapper ">
+                            <img src="img/avatars/jorik.jpg " alt=" ">
+                        </div>
+                        <h3>Yandex</h3>
+                    </div>
+                    <div class="change-company drop-company">
+                        <div class="change-img-wrapper ">
+                            <img src="img/avatars/jorik.jpg " alt=" ">
+                        </div>
+                        <h3>Company Name</h3>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <ul class="left-menu">
+                <li>
+                    <div onmouseenter="menuLight('lightedIcon')" onmouseleave="menuLight('lightedIcon')" class="menu-point">
+                        <div class="menu-img-wrapper">
+                            <img id="lightedIcon" src="img/icons/gg_feed.svg" alt="">
+                        </div>
+                        <a href="">Лента</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="menu-point">
+                        <div class="menu-img-wrapper">
+                            <img id="lightedIcon" src="img/icons/bx_bxs-cabinet.svg" alt="">
+                        </div>
+                        <a href="">Кабинет</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="menu-point">
+                        <div class="menu-img-wrapper">
+                            <img src="img/icons/bx_bx-map.svg" alt="">
+                        </div>
+                        <a href="">Карта</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="menu-point">
+                        <div class="menu-img-wrapper">
+                            <img src="img/icons/ci_settings-filled.svg" alt="">
+                        </div>
+                        <a href="">Настройки</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="feed-area">
+            <div class="feed-settings">
+                <h3><a href="">Все новости</a></h3>
+                <hr class="hr-1">
+                <h3>Новинки</h3>
+                <hr class="hr-2">
+                <h3>Топ</h3>
+                <hr class="hr-3">
+                <select>
+                    <option value="1">По популярности</option>
+                    <option value="2">Набирают популярность</option>
+                </select>
+            </div>
+        </div>
     </main>
     <footer>
 
     </footer>
+    <script>
+        function showDrop(element) {
+            if (document.getElementById(element)) {
+                let dropMenu = document.getElementById(element);
+                if (dropMenu.style.display != 'block') {
+                    dropMenu.style.display = 'block';
+                } else {
+                    dropMenu.style.display = 'none'
+                }
+            } else alert('Error')
+        }
+
+        function menuLight(element) {
+            if (document.getElementById(element)) {
+                let icon = document.getElementById(element);
+                if (icon.src = 'img/icons/gg_feed.svg') {
+                    icon.src = 'img/icons/gg_feed-1.svg'
+                } else {
+                    icon.src = 'img/icons/gg_feed.svg'
+                }
+            } else alert('Error')
+        }
+        let icon = document.getElementById('lightedIcon');
+
+        function switchColor() {
+
+        }
+    </script>
 </body>
 
 </html>
