@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Кабинет</h1>
+    <nav class="left-side-menu">
+        <div class="change-arrows">
+            <button onclick="showDrop('drop-menu')" id="drop-btn"><img src="img/arrows.svg" alt=""></a></button>
+        </div>
+        <div class="change-company">
+            <div class="change-img-wrapper">
+                <img src="img/avatars/jorik.jpg" alt="">
+            </div>
+            <h3>Drake INC</h3>
+
+        </div>
+        <div id="drop-menu" class="dropdown ">
+            <div class="dropdown-wrapper">
+                <div class="change-company drop-company">
+                    <div class="change-img-wrapper ">
+                        <img src="img/avatars/jorik.jpg " alt=" ">
+                    </div>
+                    <h3>Yandex</h3>
+                </div>
+                <div class="change-company drop-company">
+                    <div class="change-img-wrapper ">
+                        <img src="img/avatars/jorik.jpg " alt=" ">
+                    </div>
+                    <h3>Company Name</h3>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <ul class="left-menu">
+            <li>
+                <div class="menu-point">
+                    <div class="menu-img-wrapper">
+                        <img class="lighted" src="img/icons/gg_feed.svg" alt="">
+                    </div>
+                    <a href="feed.html">Лента</a>
+                </div>
+            </li>
+            <li>
+                <div style="border-left:2px solid #2B3FFF ;" class="menu-point">
+                    <div class="menu-img-wrapper">
+                        <img class="lighted" src="img/icons/bx_bxs-cabinet-1.svg" alt="">
+                    </div>
+                    <a href="cabinet.html">Кабинет</a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-point">
+                    <div class="menu-img-wrapper">
+                        <img class="dark" src="img/icons/bx_bx-map.svg" alt="">
+                        <img style="display: none;" class="lighted" src="img/icons/bx_bx-map-1.svg" alt="">
+                    </div>
+                    <a href="map.html">Карта</a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-point">
+                    <div class="menu-img-wrapper">
+                        <img class="dark" src="img/icons/ci_settings-filled.svg" alt="">
+                        <img style="display: none;" class="lighted" src="img/icons/ci_settings-filled-1.svg" alt="">
+                    </div>
+                    <a href="settings.html">Настройки</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</body>
+
+</html>
