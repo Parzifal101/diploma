@@ -497,7 +497,9 @@ input::placeholder {
     width: 48px;
     height: 48px;
     margin-left: 4%;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     border-radius: 24px;
 }
@@ -628,6 +630,123 @@ input::placeholder {
     border: none;
     border-radius: 12px;
     background-color: #e6e6e6;
+}
+
+.cabinet-area {
+    display: block;
+    float: right;
+    margin-top: 4%;
+    width: 84%;
+    height: 100%;
+}
+
+.cabinet-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 320px;
+    overflow: hidden;
+}
+
+.info-area {
+    display: block;
+    width: 100%;
+}
+
+.info-area h1 {
+    font-size: 42px;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.status-menu {
+    display: inline-block;
+    margin-top: 4%;
+    margin-left: 1%;
+    width: 20%;
+}
+
+.status-menu hr {
+    width: 2%;
+}
+
+.status-menu h3 {
+    display: inline-block;
+    color: #A6A6A6;
+    padding-left: 6%
+}
+
+.company-info {
+    background: #fff;
+    display: block;
+    float: right;
+    margin-right: 6%;
+    padding-bottom: 2%;
+    width: 36%;
+    height: 200px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 12px 2px #dddddd;
+}
+
+.company-icon img {
+    height: 100%;
+}
+
+.company-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+    overflow: hidden;
+    margin-top: 4%;
+    margin-left: 4%;
+}
+
+.company-info h2 {
+    display: inline-block;
+    width: 20%;
+    margin-top: 4%;
+    margin-left: 3%;
+}
+
+.company-info-head {
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.company-info-left {
+    display: inline-block;
+    width: 60%;
+    margin-left: 4%;
+}
+
+.company-info-left p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    opacity: 50%;
+}
+
+.company-info hr {
+    display: inline-block;
+    width: 0%;
+    height: 42%;
+    margin-left: 2%;
+    margin-top: 2%;
+    color: #2B3FFF;
+}
+
+.company-info-right {
+    float: right;
+    margin-right: 2%;
+    font-weight: 500;
+    color: #2B3FFF;
 }
 
 @media screen and (max-width: 375px) {

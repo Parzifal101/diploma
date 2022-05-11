@@ -1,3 +1,7 @@
+<?php
+    require 'config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +90,7 @@
                         <div class="menu-img-wrapper">
                             <img class="lighted" src="img/icons/gg_feed-1.svg" alt="">
                         </div>
-                        <a href="feed.html">Лента</a>
+                        <a href="feed.php">Лента</a>
                     </div>
                 </li>
                 <li>
@@ -95,7 +99,7 @@
                             <img class="dark" src="img/icons/bx_bxs-cabinet.svg" alt="">
                             <img style="display: none;" class="lighted" src="img/icons/bx_bxs-cabinet-1.svg" alt="">
                         </div>
-                        <a href="cabinet.html">Кабинет</a>
+                        <a href="cabinet.php">Кабинет</a>
                     </div>
                 </li>
                 <li>
@@ -113,7 +117,7 @@
                             <img class="dark" src="img/icons/ci_settings-filled.svg" alt="">
                             <img style="display: none;" class="lighted" src="img/icons/ci_settings-filled-1.svg" alt="">
                         </div>
-                        <a href="settings.html">Настройки</a>
+                        <a href="settings.php">Настройки</a>
                     </div>
                 </li>
             </ul>
@@ -153,13 +157,18 @@
                 <a href="#" class="slider__control" data-slide="prev"></a>
                 <a href="#" class="slider__control" data-slide="next"></a>
             </div> -->
+            <?php
+                $query = $pdo->query('SELECT * FROM `post`');
+                while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+                    
+             ?>  
             <div class="feed-post">
                 <div class="post-head">
                     <div class="post-head-wrapper">
                         <div class="post-icon-wrapper">
-                            <img src="img/avatars/jorik.jpg" alt="">
+                            <img src="img/post-img/icon/<?php echo $row->head_img?>" alt="">
                         </div>
-                        <h3><a href="">Drake INC</a></h3>
+                        <h3><a href=""><?php echo $row->head_title?></a></h3>
                         <button class="dots"><img src="img/icons/dots-icon.svg" alt=""></button>
                     </div>
                 </div>
@@ -182,16 +191,14 @@
                     </div>
                 </div>
                 <div class="post-img">
-                    <a href=""><img src="img/5_registraciya.jpeg" alt=""></a>
+                    <a href=""><img src="img/post-img/<?php echo $row->post_img?>" alt=""></a>
                 </div>
 
                 <div class="post-text">
                     <a id="linkView" href="">
-                        <h1>Заголовок</h1>
-                        <span class="date">12.03.2022</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque qui, commodi nisi perspiciatis voluptatem aliquam, dolorum maxime tenetur deserunt architecto, facere dignissimos officia optio molestias animi ratione culpa quos
-                            provident?
-                        </p>
+                        <h1><?php echo $row->title?></h1>
+                        <span class="date"><?php echo $row->date?></span>
+                        <p><?php echo $row->text?></p>
                     </a>
                     <div class="post-views">
                         <div class="views-icon">
@@ -217,7 +224,9 @@
                 </div>
 
             </div>
-
+            <?php
+            }
+        ?>
 
         </div>
     </main>
