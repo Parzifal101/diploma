@@ -99,7 +99,7 @@
                             <img class="dark" src="img/icons/bx_bxs-cabinet.svg" alt="">
                             <img style="display: none;" class="lighted" src="img/icons/bx_bxs-cabinet-1.svg" alt="">
                         </div>
-                        <a href="cabinet.php">Кабинет</a>
+                        <a href="cabinet.html">Кабинет</a>
                     </div>
                 </li>
                 <li>
@@ -117,7 +117,7 @@
                             <img class="dark" src="img/icons/ci_settings-filled.svg" alt="">
                             <img style="display: none;" class="lighted" src="img/icons/ci_settings-filled-1.svg" alt="">
                         </div>
-                        <a href="settings.php">Настройки</a>
+                        <a href="settings.html">Настройки</a>
                     </div>
                 </li>
             </ul>

@@ -115,7 +115,7 @@
                                 <img class="dark" src="img/icons/ci_settings-filled.svg" alt="">
                                 <img style="display: none;" class="lighted" src="img/icons/ci_settings-filled-1.svg" alt="">
                             </div>
-                            <a href="settings.php">Настройки</a>
+                            <a href="settings.html">Настройки</a>
                         </div>
                     </li>
                 </ul>
@@ -161,8 +161,8 @@
                         <hr class="hr-3">
                     </div>
                     <div class="info-filter">
-                        <form action="scripts/add.php" method="get">
-                            <input type="file" name="post_img" id="">
+                        <form action="add.php" method="post" enctype="multipart/form-data">
+                            <input name="pic" type="file">
                             <input name="title" type="text">
                             <textarea name="text" id="" cols="30" rows="10"></textarea>
                             <button type="submit">Создать</button>
