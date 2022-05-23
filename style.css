@@ -749,6 +749,26 @@ input::placeholder {
     color: #2B3FFF;
 }
 
+.msg {
+    display: block;
+    width: 100%;
+    color: red;
+}
+
+.logout {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 160%;
+}
+
+.logout a {
+    color: rgb(204, 53, 53);
+    font-weight: 600;
+    font-size: 18px;
+}
+
 @media screen and (max-width: 375px) {
     .map-link {
         margin-top: 14%;

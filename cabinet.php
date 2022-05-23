@@ -1,5 +1,11 @@
 <?php
+    session_start();
     require 'config.php';
+
+    if(empty($_SESSION['user'])){
+        header('Location: /auth.php');
+    }
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -30,7 +36,7 @@
                 <div class="small-profile-img-wrap">
                     <img src="img/avatars/jorik.jpg" alt="">
                 </div>
-                <h3>Имя Фамилия</h3>
+                <h3><?= $_SESSION['user']['name']?> <?= $_SESSION['user']['surname']?></h3>
                 <p>Должность</p>
                 <!-- <div class="change-arrows">
                 <button onclick="showDrop('drop-menu')" id="drop-btn"><img src="img/arrows.svg" alt=""></a></button>
@@ -118,6 +124,9 @@
                             <a href="settings.html">Настройки</a>
                         </div>
                     </li>
+                    <div class="logout">
+                        <a href="scripts/logout.php">Выход</a>
+                    </div>
                 </ul>
             </nav>
             <div class="cabinet-area">
@@ -161,7 +170,7 @@
                         <hr class="hr-3">
                     </div>
                     <div class="info-filter">
-                        <form action="add.php" method="post" enctype="multipart/form-data">
+                        <form action="scripts/add.php" method="post" enctype="multipart/form-data">
                             <input name="pic" type="file">
                             <input name="title" type="text">
                             <textarea name="text" id="" cols="30" rows="10"></textarea>
