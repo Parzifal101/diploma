@@ -68,26 +68,35 @@
                     <div class="change-img-wrapper">
                         <img src="img/avatars/jorik.jpg" alt="">
                     </div>
-                    <h3>Drake INC</h3>
+                    <h3><?php echo($_SESSION['user']['company_name'])?></h3>
 
                 </div>
                 <div id="drop-menu" class="dropdown ">
+                
                     <div class="dropdown-wrapper">
+                    <?php
+                     $statement = $pdo->prepare("SELECT users.id, users.name, company.id as c_id, company.name as c_name
+                     FROM personalcom
+                     LEFT JOIN users on users.id = personalcom.user_id
+                     LEFT JOIN company on company.id = personalcom.company_id
+                     WHERE personalcom.user_id = :user_id");
+                     $statement->execute([':user_id' => $_SESSION['user']['id']]);
+                    
+                    while($company = $statement->fetch()){
+                    ?>
                         <div class="change-company drop-company">
                             <div class="change-img-wrapper ">
                                 <img src="img/avatars/jorik.jpg " alt=" ">
                             </div>
-                            <h3>Yandex</h3>
+                            <h3><?php print_r($company['c_name'])?></h3>
                         </div>
-                        <div class="change-company drop-company">
-                            <div class="change-img-wrapper ">
-                                <img src="img/avatars/jorik.jpg " alt=" ">
-                            </div>
-                            <h3>Company Name</h3>
-                        </div>
+                    <?php
+                    }
+                    ?>
                     </div>
                 </div>
                 <hr>
+                
                 <ul class="left-menu">
                     <li>
                         <div class="menu-point">
@@ -159,8 +168,9 @@
                         </div>
                     </div>
                 </div>
+               
                 <div class="info-area">
-                    <h1>Company</h1>
+                    <h1><?php echo($_SESSION['user']['company_name'])?></h1>
                     <div class="status-menu">
                         <h3><a href="">Все новости</a></h3>
                         <hr class="hr-1">
@@ -178,7 +188,9 @@
                         </form>
                     </div>
                 </div>
+                
             </div>
+           
         </main>
         <footer>
 

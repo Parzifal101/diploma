@@ -25,12 +25,21 @@
     $query->bindParam(":password",$password);
 
     $query->execute();
+
+    $statement = $pdo->prepare("SELECT * FROM `users` WHERE login = :login");
+    $statement -> execute([':login' => $login]);
+    $user = $statement->fetch();
+    
     $_SESSION['user'] = [
+        "id" => $user['id'],
         "login" => $login,
         "name" => $name,
-        "surname" => $surname
+        "surname" => $surname,
+        "company_id",
+        "company_name"
     ];
-    header('Location: /cabinet.php');
+    print_r ($_SESSION['user']);
+    header('Location: /create_company.php');
 }else{
     $_SESSION['message'] = "Пароли не совпадают";
     header('Location: /reg.php');
