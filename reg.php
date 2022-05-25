@@ -22,7 +22,7 @@
     <main>
         <div class="container">
             <div class="right-row">
-                <div id="map"></div>
+                <div class="map" id="map"></div>
                 <img src="img/Group 139.png" alt="">
                 <script>
                     let map = document.getElementById('map');

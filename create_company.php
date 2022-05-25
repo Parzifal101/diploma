@@ -21,7 +21,7 @@
     <main>
         <div class="container">
             <div class="right-row">
-                <div id="map"></div>
+                <div class="map" id="map"></div>
                 <img src="img/Group 139.png" alt="">
                 <script>
                     let map = document.getElementById('map');
@@ -49,6 +49,7 @@
                             <input placeholder="Контактный телефон" type="text" name="company_phone">
                             <input placeholder="Местоположение" type="text" name="company_location">
                             <input placeholder="ИНН" type="text" name="company_inn">
+                            <textarea placeholder="Описание" name="description" cols="30" rows="10"></textarea>
                             <a href="">Забыли пароль?</a>
                             <button>Войти</button>
                         </form>

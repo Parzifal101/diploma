@@ -75,7 +75,7 @@
                 
                     <div class="dropdown-wrapper">
                     <?php
-                     $statement = $pdo->prepare("SELECT users.id, users.name, company.id as c_id, company.name as c_name
+                     $statement = $pdo->prepare("SELECT users.id, users.name, company.id as c_id, company.name as c_name, company.description as c_desc, company.location as c_loc, company.phone as c_phone, company.link as c_link
                      FROM personalcom
                      LEFT JOIN users on users.id = personalcom.user_id
                      LEFT JOIN company on company.id = personalcom.company_id
@@ -84,12 +84,18 @@
                     
                     while($company = $statement->fetch()){
                     ?>
+                    <form action="scripts/company_switch.php" method="post">
+                       
                         <div class="change-company drop-company">
+                        <button class="switch-btn">
                             <div class="change-img-wrapper ">
                                 <img src="img/avatars/jorik.jpg " alt=" ">
                             </div>
                             <h3><?php print_r($company['c_name'])?></h3>
+                            </button>
                         </div>
+                        
+                        </form>
                     <?php
                     }
                     ?>
@@ -121,7 +127,7 @@
                                 <img class="dark" src="img/icons/bx_bx-map.svg" alt="">
                                 <img style="display: none;" class="lighted" src="img/icons/bx_bx-map-1.svg" alt="">
                             </div>
-                            <a href="map.html">Карта</a>
+                            <a href="map.php">Карта</a>
                         </div>
                     </li>
                     <li>
@@ -140,33 +146,55 @@
             </nav>
             <div class="cabinet-area">
                 <div class="cabinet-header">
-                    <img src="img/cast_page-0001.jpg" alt="">
+                    <?php
+                    $stmt  = $pdo->prepare("SELECT * FROM `company` WHERE id = :company_id");
+                    $stmt ->execute([':company_id' => $_SESSION['user']['company_id']]);
+
+                    while($company_info = $stmt->fetch()){
+                    ?>
+                    <img src="img/header/<?php print_r($company_info[7])?>" alt="">
+                    <?php
+                        }
+                    ?>
+                    <form action="scripts/header_add.php" method="post" enctype="multipart/form-data">
+                        <input name="head_pic" type="file">
+                        <button>Изменить</button>
+                    </form>
                 </div>
                 <div class="company-info">
                     <div class="company-info-head">
                         <div class="company-icon">
                             <img src="img/cast_page-0001.jpg" alt="">
                         </div>
-                        <h2>Name</h2>
+                        <h2><?php echo($_SESSION['user']['company_name'])?></h2>
                     </div>
+                    <?php
+                        $statement_2 = $pdo->prepare("SELECT * FROM `company` WHERE id = :company_id");
+                        $statement_2->execute([':company_id' => $_SESSION['user']['company_id']]);
+
+                        while($company_info = $statement_2->fetch()){
+                    ?>
                     <div class="company-info-left">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas obcaecati aspernatur quisquam.</p>
+                        <p><?php print_r($company_info['description'])?></p>
                     </div>
                     <hr>
                     <div class="company-info-right">
                         <div class="adress">
                             <img src="" alt="">
-                            <span>Москва</span>
+                            <span><?php print_r($company_info['location'])?></span>
                         </div>
                         <div class="phone">
                             <img src="" alt="">
-                            <span>+7(977)768-32-12</span>
+                            <span><?php print_r($company_info['phone'])?></span>
                         </div>
                         <div class="site-link">
                             <img src="" alt="">
-                            <span><a href="https://avasystems.ru">avasystems.ru</a></span>
+                            <span><a href="https://<?php print_r($company_info['link'])?>"><?php print_r($company_info['link'])?></a></span>
                         </div>
                     </div>
+                    <?php
+                    }
+                    ?>
                 </div>
                
                 <div class="info-area">
@@ -186,6 +214,37 @@
                             <textarea name="text" id="" cols="30" rows="10"></textarea>
                             <button type="submit">Создать</button>
                         </form>
+                    </div>
+                    <div class="posts-table">
+                        <table>
+                            <thead>
+                                <td>Статус</td>
+                                <td>Наименование</td>
+                                <td>Показы на МСИ</td>
+                                <td>Лайки</td>
+                                <td>Комментарии</td>
+                                <td>Действие</td>
+                            </thead>
+                            <?php
+                                $statement_3 = $pdo->prepare("SELECT * FROM `post` WHERE company_id = :company_id");
+                                $statement_3->execute([':company_id' => $_SESSION['user']['company_id']]);
+
+                                while($company_posts = $statement_3->fetch()){
+                            ?>
+                            <tr>
+                                <td><?php print_r($company_posts['status'])?></td>
+                                <td><?php print_r($company_posts['title'])?></td>
+                                <td><?php print_r($company_posts['views'])?></td>
+                                <td><?php print_r($company_posts['likes'])?></td>
+                                <td><?php print_r($company_posts['comments'])?></td>
+                                <form action="scripts/delete_post.php" method="post">
+                                <td><button>Удалить</button><button>Статистика</button><button>Редактировать</button></td>
+                                </form>
+                            </tr>
+                            <?php
+                                }
+                            ?>
+                        </table>
                     </div>
                 </div>
                 

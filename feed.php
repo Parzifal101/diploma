@@ -99,7 +99,7 @@
                             <img class="dark" src="img/icons/bx_bxs-cabinet.svg" alt="">
                             <img style="display: none;" class="lighted" src="img/icons/bx_bxs-cabinet-1.svg" alt="">
                         </div>
-                        <a href="cabinet.html">Кабинет</a>
+                        <a href="cabinet.php">Кабинет</a>
                     </div>
                 </li>
                 <li>
@@ -108,7 +108,7 @@
                             <img class="dark" src="img/icons/bx_bx-map.svg" alt="">
                             <img style="display: none;" class="lighted" src="img/icons/bx_bx-map-1.svg" alt="">
                         </div>
-                        <a href="map.html">Карта</a>
+                        <a href="map.php">Карта</a>
                     </div>
                 </li>
                 <li>
@@ -157,6 +157,7 @@
                 <a href="#" class="slider__control" data-slide="prev"></a>
                 <a href="#" class="slider__control" data-slide="next"></a>
             </div> -->
+            
             <?php
                 $query = $pdo->query('SELECT * FROM `post`');
                 while ($row = $query->fetch(PDO::FETCH_OBJ)) {
