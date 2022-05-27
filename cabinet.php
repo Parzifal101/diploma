@@ -236,8 +236,9 @@
                                 <td><?php print_r($company_posts['title'])?></td>
                                 <td><?php print_r($company_posts['views'])?></td>
                                 <td><?php print_r($company_posts['likes'])?></td>
-                                <td><?php print_r($company_posts['comments'])?></td>
+                                <td><?php print_r($company_posts['comment_id'])?></td>
                                 <form action="scripts/delete_post.php" method="post">
+                                <input type = "text" name = "id" value ="<?php print_r($company_posts['id'])?>" hidden />
                                 <td><button>Удалить</button><button>Статистика</button><button>Редактировать</button></td>
                                 </form>
                             </tr>

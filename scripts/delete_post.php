@@ -1,13 +1,20 @@
 <?php
     session_start();
     require '../config.php';
-    $statement_3 = $pdo->prepare("SELECT * FROM `post` WHERE company_id = :company_id");
-    $statement_3->execute([':company_id' => $_SESSION['user']['company_id']]);
-    $company_posts = $statement_3->fetch();
 
-    $statement_3 = $pdo->prepare("DELETE FROM `post` WHERE `post`.`id` = :company_id");
-    $statement_3->execute([':company_id' => $company_posts['id']]);
-    $deleted = $statement_3->fetch();
+    $id = $_POST['id'];
 
+    $statement_3 = $pdo->prepare("SELECT * FROM `post` WHERE company_id = :company_id AND id = :id ");
+    $statement_3->bindParam(":company_id",$_SESSION['user']['company_id'],PDO::PARAM_STR);
+    $statement_3->bindParam(":id",$id,PDO::PARAM_STR);
+    $statement_3->execute();
+
+    $statement_3 = $pdo->prepare("DELETE FROM `post` WHERE `company_id` = :company_id AND id = :id ");
+    $statement_3->bindParam(":company_id",$_SESSION['user']['company_id'],PDO::PARAM_STR);
+    $statement_3->bindParam(":id",$id,PDO::PARAM_STR);
+    $statement_3->execute();
+    
+
+    
     header('Location: ../cabinet.php')
 ?>

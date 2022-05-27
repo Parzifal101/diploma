@@ -158,19 +158,22 @@ require 'config.php';
                 <a href="#" class="slider__control" data-slide="prev"></a>
                 <a href="#" class="slider__control" data-slide="next"></a>
             </div> -->
-
+            
             <?php
-            $query = $pdo->query('SELECT * FROM `post` ORDER BY `post`.`date` DESC');
-            while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+            $stmt = $pdo->prepare('SELECT * FROM `post` WHERE id = :id');
+            $stmt ->execute([':id' => $_GET['id']]);
+            $post = $stmt->fetch();
+
+            
 
             ?>
                 <div class="feed-post">
                     <div class="post-head">
                         <div class="post-head-wrapper">
                             <div class="post-icon-wrapper">
-                                <img src="img/post-img/icon/<?php echo $row->head_img ?>" alt="">
+                                <img src="img/post-img/icon/<?php echo $post['head_img'] ?>" alt="">
                             </div>
-                            <h3><a href=""><?php echo $row->head_title ?></a></h3>
+                            <h3><a href=""><?php echo $post['head_title'] ?></a></h3>
                             <button class="dots"><img src="img/icons/dots-icon.svg" alt=""></button>
                         </div>
                     </div>
@@ -193,14 +196,14 @@ require 'config.php';
                         </div>
                     </div>
                     <div class="post-img">
-                        <a href=""><img src="img/post-img/<?php echo $row->post_img ?>" alt=""></a>
+                        <a href=""><img src="img/post-img/<?php echo $post['post_img'] ?>" alt=""></a>
                     </div>
 
                     <div class="post-text">
-                        <a id="linkView" href="post.php?id=<?= $row->id?>">
-                            <h1><?php echo $row->title ?></h1>
-                            <span class="date"><?php echo $row->date ?></span>
-                            <p><?php echo $row->text ?></p>
+                        <a id="linkView" href="#">
+                            <h1><?php echo $post['title'] ?></h1>
+                            <span class="date"><?php echo $post['date'] ?></span>
+                            <p><?php echo $post['text'] ?></p>
                         </a>
                         <div class="post-views">
                             <div class="views-icon">
@@ -210,9 +213,9 @@ require 'config.php';
                                 <p><span id="count">200 345</span> посмотрели эту запись</p>
                             </div>
                             <div class="post-likes">
-                                <div class="like" data-id="<?php echo $row->id ?>">
+                                <div class="like" data-id="<?php echo $post['id'] ?>">
                                     
-                                    <span class="counter"><?php echo $row->likes ?></span>
+                                    <span class="counter"><?php echo $post['likes'] ?></span>
                                 </div>
                                 
                             </div>
@@ -220,9 +223,11 @@ require 'config.php';
                         </div>
                         <h3 style="margin-top: 4%;">Комментарии</h3>
                         <?php
-                            $stmt = $pdo->prepare('SELECT * FROM comments WHERE post_id = ?');
-                            $stmt->execute([$row->id]);
-                            $comments = $stmt->fetchAll(PDO::FETCH_OBJ);
+                            $stmt_2 = $pdo->prepare('SELECT * FROM comments WHERE post_id = :post_id');
+                            $stmt_2->execute([':post_id' => $_GET['id']]);
+                            $comments = $stmt_2->fetch();
+
+                            
 
                         ?>
                         <div id="comment" class="comment">
@@ -231,19 +236,21 @@ require 'config.php';
                                     <img src="img/avatars/jorik.jpg" alt="">
                                 </div>
                                 <div class="user-info">
-                                    <p><?php echo $comments['user_id'] ?></p>
-                                    <span><?php echo $comments['user_id'] ?></span>
+                                    <p>Jorik</p>
+                                    
+                                    <span>12.03.2022</span>
                                 </div>
                             </div>
                             <div class="comment-text">
-                                <p><?php echo $comments ?></p>
+                                <p><?php print_r($comments['text'])?></p>
                             </div>
                         </div>
                         <div class="hide-btn">
                             <button onclick="showDrop('comment')" type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#services" id="show"><span>Показать всё</span></button>
                         </div>
                         <div class="post-comments">
-                            <form style="width: 100%;" action="scripts/add_post.php" method="post">
+                            <form style="width: 100%;" action="scripts/add_post.php?>" method="get">
+                                <input type = "text" name = "id" value ="<?php echo $post['id']?>" hidden />
                                 <input name="comment_text" placeholder="Напишите, что вы думаете об этом" type="text">
                                 <button><img src="img/icons/paper-airplane.svg" alt=""></button>
                             </form>
@@ -251,9 +258,7 @@ require 'config.php';
                     </div>
 
                 </div>
-            <?php
-            }
-            ?>
+            
 
         </div>
     </main>
@@ -292,20 +297,7 @@ require 'config.php';
         }
 
 
-        // let count = document.getElementById('count');
-        // const link = document.getElementById('linkView');
-
-        // link.forEach(linkItem => {
-        //     linkItem.addEventListener("click", counter)
-        // })
-
-        // function counter(event) {
-        //     if (event.type == "click") {
-        //         count.innerHTML += 1;
-        //     }
-        // }
-
-
+       
         $(document).ready(function() {
         $(".like").bind("click", function() {
             var link = $(this);

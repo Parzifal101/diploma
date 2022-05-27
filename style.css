@@ -604,7 +604,31 @@ input::placeholder {
 }
 
 .post-likes {
-    margin-left: 22%;
+    margin-left: 52%;
+    cursor: pointer;
+}
+
+.like {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+}
+
+.like span {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    top: 14px;
+}
+
+.like:hover.active,
+.like {
+    background: url('../img/icons/icon-park-outline_like.svg') no-repeat;
+}
+
+.like.active {
+    background: url('../img/icons/icon-park-solid_like.svg') no-repeat;
+    color: #fff;
 }
 
 .post-comments {
@@ -817,6 +841,62 @@ td {
     height: 1000px;
     margin-left: 16%;
     margin-top: 4%;
+}
+
+.comment {
+    margin-top: 4%;
+    display: none;
+}
+
+.comment-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.avatar-wrapper {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+    overflow: hidden;
+}
+
+.user-info {
+    display: inline-block;
+    margin-left: 2%;
+}
+
+.user-info p {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.user-info span {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 50%;
+}
+
+.hide-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide-btn button {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 700;
+    opacity: 50%;
+    cursor: pointer;
+}
+
+.hide-btn button:hover {
+    opacity: 100%;
+    color: #2B3FFF;
 }
 
 @media screen and (max-width: 375px) {
