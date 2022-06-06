@@ -223,12 +223,11 @@ require 'config.php';
                         </div>
                         <h3 style="margin-top: 4%;">Комментарии</h3>
                         <?php
-                            $stmt_2 = $pdo->prepare('SELECT * FROM comments WHERE post_id = :post_id');
-                            $stmt_2->execute([':post_id' => $_GET['id']]);
-                            $comments = $stmt_2->fetch();
-
+                            $stmt = $pdo->prepare('SELECT * FROM comments WHERE post_id = ?');
+                            $stmt->execute([$post['id']]);
+                           while ($comments = $stmt->fetch(PDO::FETCH_ASSOC)){
                             
-
+                           
                         ?>
                         <div id="comment" class="comment">
                             <div class="comment-head">
@@ -236,18 +235,17 @@ require 'config.php';
                                     <img src="img/avatars/jorik.jpg" alt="">
                                 </div>
                                 <div class="user-info">
-                                    <p>Jorik</p>
-                                    
-                                    <span>12.03.2022</span>
+                                    <p><?php print_r($comments['user_name'])?></p>
+                                    <span><?php print_r($comments['date'])?></span>
                                 </div>
                             </div>
                             <div class="comment-text">
                                 <p><?php print_r($comments['text'])?></p>
                             </div>
                         </div>
-                        <div class="hide-btn">
-                            <button onclick="showDrop('comment')" type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#services" id="show"><span>Показать всё</span></button>
-                        </div>
+                        <?php
+                        }
+                        ?>
                         <div class="post-comments">
                             <form style="width: 100%;" action="scripts/add_post.php?>" method="get">
                                 <input type = "text" name = "id" value ="<?php echo $post['id']?>" hidden />

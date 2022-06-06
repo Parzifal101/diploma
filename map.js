@@ -1,8 +1,8 @@
 var randomNumber = function(min, max) {
     return Math.random() * (max - min + 1) + min;
 };
-let postCount = document.querySelector('.posts-count').getAttribute('data-count');
-let postImg = document.querySelector('.posts-count').getAttribute('data-img');
+// let postCount = document.querySelector('.posts-count').getAttribute('data-count');
+// let postImg = document.querySelector('.posts-count').getAttribute('data-img');
 
 let img = 'img/cast_page-0001.jpg'
 ymaps.ready(function() {
@@ -15,7 +15,7 @@ ymaps.ready(function() {
 
 
 
-    for (let i = 0; i < postCount.length; i++) {
+    for (let i = 0; i < 6; i++) {
         myMap.geoObjects
 
             .add(new ymaps.Placemark([randomNumber(55, 55).toFixed(6), randomNumber(37, 37).toFixed(6)], {

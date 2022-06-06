@@ -48,7 +48,7 @@ nav {
     overflow: hidden;
     float: right;
     width: 60%;
-    height: 980px;
+    height: 1080px;
     background-color: #2B3FFF;
 }
 
@@ -83,6 +83,8 @@ nav {
     font-size: 16px;
     opacity: 30%;
     font-weight: 600;
+    top: 49px;
+    position: relative;
 }
 
 .map {
@@ -132,13 +134,27 @@ nav {
 
 .form-wrap input {
     margin-top: 4%;
-    width: 70%;
+    width: 66%;
     height: 62px;
     font-size: 16px;
     font-weight: 600;
     border: none;
-    border-radius: 8px;
-    background-color: #EFEFF0;
+    /* border-radius: 8px;
+    background-color: #e2e2e2; */
+    background-color: transparent;
+    padding-left: 4%;
+    border-bottom: 1px solid #2B3FFF;
+}
+
+input:focus {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: #e7e7e7;
+}
+
+input::-moz-focus-inner {
+    border: none;
 }
 
 .form-wrap textarea {
@@ -150,14 +166,6 @@ nav {
     border: none;
     border-radius: 8px;
     background-color: #EFEFF0;
-}
-
-input::-moz-focus-inner {
-    border: 2px solid #2B3FFF;
-}
-
-input::placeholder {
-    text-indent: 120px;
 }
 
 .form-wrap a {
@@ -427,6 +435,15 @@ input::placeholder {
     color: #2B3FFF;
 }
 
+.hr-4 {
+    display: block;
+    position: absolute;
+    width: 6%;
+    margin-left: 1%;
+    margin-top: 4px;
+    color: #2B3FFF;
+}
+
 .hr-1 {
     display: block;
     position: absolute;
@@ -685,6 +702,66 @@ input::placeholder {
     width: 100%;
 }
 
+.info-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-filter form {
+    width: 70%;
+}
+
+#file-inp {
+    border: none;
+}
+
+.info-filter input {
+    display: block;
+    width: 96%;
+    margin-top: 2%;
+    height: 32px;
+    padding-left: 4%;
+    border-bottom: 1px solid #888888;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 16px;
+}
+
+.info-filter input:focus {
+    border-bottom: 1px solid #2B3FFF;
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.info-filter textarea {
+    display: block;
+    width: 100%;
+    margin-top: 4%;
+    font-size: 16px;
+}
+
+.info-filter button {
+    width: 142px;
+    height: 42px;
+    border: none;
+    background-color: #b4b4b4;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 36%;
+    margin-top: 12%;
+}
+
+.info-filter button:hover {
+    background-color: #2B3FFF;
+}
+
 .info-area h1 {
     font-size: 42px;
     margin-left: 2%;
@@ -714,7 +791,7 @@ input::placeholder {
     float: right;
     margin-right: 6%;
     padding-bottom: 2%;
-    width: 36%;
+    width: 46%;
     height: 200px;
     border-radius: 12px;
     box-shadow: 4px 4px 12px 2px #dddddd;
@@ -748,6 +825,7 @@ input::placeholder {
     display: flex;
     align-items: center;
     height: 70px;
+    width: 100%;
 }
 
 .company-info-left {
@@ -780,6 +858,76 @@ input::placeholder {
     margin-right: 2%;
     font-weight: 500;
     color: #2B3FFF;
+}
+
+.create-btn {
+    margin-left: 4%;
+    padding-top: 4%;
+}
+
+.create-btn button {
+    width: 120px;
+    height: 42px;
+    border: none;
+    background-color: #2B3FFF;
+    color: rgb(168, 168, 168);
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.create-btn button:hover {
+    color: #fff;
+}
+
+.close {
+    width: 20%;
+    display: inline-block;
+}
+
+.close button {
+    position: relative;
+    width: 60%;
+    margin-left: 48%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 30%;
+}
+
+.pop-wrapper img {
+    width: 28%;
+}
+
+.pop-wrapper button:hover {
+    opacity: 100%;
+}
+
+.pop-wrapper {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .4);
+    width: 84%;
+    height: 100%;
+    top: 0px;
+}
+
+.pop-up-add {
+    position: absolute;
+    width: 32%;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding-bottom: 8%;
+}
+
+.pop-up-add h2 {
+    padding: 2%;
+    width: 75%;
+    display: inline-block;
 }
 
 .msg {
@@ -845,7 +993,7 @@ td {
 
 .comment {
     margin-top: 4%;
-    display: none;
+    display: block;
 }
 
 .comment-head {

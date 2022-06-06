@@ -1,5 +1,6 @@
 <?php
 require 'config.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +34,7 @@ require 'config.php';
             <div class="small-profile-img-wrap">
                 <img src="img/avatars/jorik.jpg" alt="">
             </div>
-            <h3>Имя Фамилия</h3>
+            <h3><?= $_SESSION['user']['name'] ?> <?= $_SESSION['user']['surname'] ?></h3>
             <p>Должность</p>
             <!-- <div class="change-arrows">
                 <button onclick="showDrop('drop-menu')" id="drop-btn"><img src="img/arrows.svg" alt=""></a></button>
@@ -65,7 +66,7 @@ require 'config.php';
                 <div class="change-img-wrapper">
                     <img src="img/avatars/jorik.jpg" alt="">
                 </div>
-                <h3>Drake INC</h3>
+                <h3><?php echo ($_SESSION['user']['company_name']) ?></h3>
 
             </div>
             <div id="drop-menu" class="dropdown ">
@@ -220,10 +221,11 @@ require 'config.php';
                         </div>
                         <h3 style="margin-top: 4%;">Комментарии</h3>
                         <?php
-                            $stmt = $pdo->prepare('SELECT * FROM comments WHERE post_id = ?');
+                            $stmt = $pdo->prepare('SELECT * FROM comments WHERE post_id = ? ORDER BY id DESC LIMIT 1');
                             $stmt->execute([$row->id]);
-                            $comments = $stmt->fetchAll(PDO::FETCH_OBJ);
-
+                           while ($comments = $stmt->fetch(PDO::FETCH_ASSOC)){
+                            
+                           
                         ?>
                         <div id="comment" class="comment">
                             <div class="comment-head">
@@ -231,16 +233,19 @@ require 'config.php';
                                     <img src="img/avatars/jorik.jpg" alt="">
                                 </div>
                                 <div class="user-info">
-                                    <p><?php echo $comments['user_id'] ?></p>
-                                    <span><?php echo $comments['user_id'] ?></span>
+                                    <p><?php print_r($comments['user_name'])?></p>
+                                    <span><?php print_r($comments['date'])?></span>
                                 </div>
                             </div>
                             <div class="comment-text">
-                                <p><?php echo $comments ?></p>
+                                <p><?php print_r($comments['text'])?></p>
                             </div>
                         </div>
+                        <?php
+                        }
+                        ?>
                         <div class="hide-btn">
-                            <button onclick="showDrop('comment')" type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#services" id="show"><span>Показать всё</span></button>
+                            <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#services" id="show"><span><a id="linkView" href="post.php?id=<?= $row->id?>">Показать всё</a></span></button>
                         </div>
                         <div class="post-comments">
                             <form style="width: 100%;" action="scripts/add_post.php" method="post">
@@ -249,7 +254,7 @@ require 'config.php';
                             </form>
                         </div>
                     </div>
-
+                  
                 </div>
             <?php
             }
