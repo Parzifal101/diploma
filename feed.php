@@ -1,6 +1,9 @@
 <?php
-require 'config.php';
-session_start();
+    require 'config.php';
+    session_start();
+    if(!empty($_SESSION['user'])){
+        header('Location: /cabinet.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -36,25 +39,6 @@ session_start();
             </div>
             <h3><?= $_SESSION['user']['name'] ?> <?= $_SESSION['user']['surname'] ?></h3>
             <p>Должность</p>
-            <!-- <div class="change-arrows">
-                <button onclick="showDrop('drop-menu')" id="drop-btn"><img src="img/arrows.svg" alt=""></a></button>
-            </div>
-            <div id="drop-menu" class="dropdown ">
-                <div class="dropdown-wrapper">
-                    <div class="change-company drop-company">
-                        <div class="change-img-wrapper ">
-                            <img src="img/avatars/jorik.jpg " alt=" ">
-                        </div>
-                        <h3>Yandex</h3>
-                    </div>
-                    <div class="change-company drop-company">
-                        <div class="change-img-wrapper ">
-                            <img src="img/avatars/jorik.jpg " alt=" ">
-                        </div>
-                        <h3>Company Name</h3>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </header>
     <main>
@@ -140,25 +124,6 @@ session_start();
             </div>
             <div class="hide-ninja">
             </div>
-            <!-- <div class="slider">
-                <div class="slider__container">
-                    <div class="slider__wrapper">
-                        <div class="slider__items">
-                            <div class="slider__item">
-                                <img src="img/5_registraciya.jpeg" alt="">
-                            </div>
-                            <div class="slider__item">
-                                <img src="img/cast_page-0001.jpg" alt="">
-                            </div>
-                            <div class="slider__item">
-                               
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#" class="slider__control" data-slide="prev"></a>
-                <a href="#" class="slider__control" data-slide="next"></a>
-            </div> -->
 
             <?php
             $query = $pdo->query('SELECT * FROM `post` ORDER BY `post`.`date` DESC');
@@ -267,13 +232,6 @@ session_start();
     </footer>
     <script src="scripts/chiefslider.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elms = document.querySelectorAll('.slider');
-            for (var i = 0, len = elms.length; i < len; i++) {
-                // инициализация elms[i] в качестве слайдера
-                new ChiefSlider(elms[i]);
-            }
-        });
 
         function showDrop(element) {
             if (document.getElementById(element)) {
@@ -318,11 +276,11 @@ session_start();
             $.ajax({
                 url: "scripts/like.php",
                 type: "POST",
-                data: {id:id}, // Передаем ID нашей статьи
+                data: {id:id}, 
                 dataType: "json",
                 success: function(result) {
-                    if (!result.error){ //если на сервере не произойло ошибки то обновляем количество лайков на странице
-                        link.addClass('active'); // помечаем лайк как "понравившийся"
+                    if (!result.error){ 
+                        link.addClass('active'); 
                         $('.counter',link).html(result.count);
                     }else{
                         alert(result.message);

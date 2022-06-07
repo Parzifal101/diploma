@@ -1,5 +1,9 @@
 <?php
-require 'config.php';
+    session_start();
+    require 'config.php';
+    if(empty($_SESSION['user'])){
+        header('Location: /auth.php');
+    }
 ?>
 
 <!DOCTYPE html>

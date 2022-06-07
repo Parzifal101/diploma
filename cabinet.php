@@ -38,25 +38,6 @@ if (empty($_SESSION['user'])) {
             </div>
             <h3><?= $_SESSION['user']['name'] ?> <?= $_SESSION['user']['surname'] ?></h3>
             <p>Должность</p>
-            <!-- <div class="change-arrows">
-                <button onclick="showDrop('drop-menu')" id="drop-btn"><img src="img/arrows.svg" alt=""></a></button>
-            </div>
-            <div id="drop-menu" class="dropdown ">
-                <div class="dropdown-wrapper">
-                    <div class="change-company drop-company">
-                        <div class="change-img-wrapper ">
-                            <img src="img/avatars/jorik.jpg " alt=" ">
-                        </div>
-                        <h3>Yandex</h3>
-                    </div>
-                    <div class="change-company drop-company">
-                        <div class="change-img-wrapper ">
-                            <img src="img/avatars/jorik.jpg " alt=" ">
-                        </div>
-                        <h3>Company Name</h3>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </header>
     <main>
@@ -271,13 +252,7 @@ if (empty($_SESSION['user'])) {
 
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elms = document.querySelectorAll('.slider');
-            for (var i = 0, len = elms.length; i < len; i++) {
-                // инициализация elms[i] в качестве слайдера
-                new ChiefSlider(elms[i]);
-            }
-        });
+        
 
         function showDrop(element) {
             if (document.getElementById(element)) {
@@ -322,67 +297,7 @@ if (empty($_SESSION['user'])) {
                 count.innerHTML += 1;
             }
         }
-        // const btn = document.querySelectorAll('.dots');
-        // let menuSet = document.querySelectorAll('.post-dropdown');
-
-        // btn.forEach(btnItem => {
-        //     btnItem.addEventListener("click", showSet)
-        // })
-
-        // function showSet(event) {
-        //     if(event.target.) Допилить открытие настроек поста
-        // }
-        // const leftMenu = document.querySelector('.left-menu');
-        // const points = document.querySelectorAll('.menu-point')
-        // let lighted = document.querySelectorAll('.lighted');
-        // let dark = document.querySelectorAll('.dark');
-        // console.log(dark)
-
-
-        // function light(event) {
-        //     if (event.type == "mouseenter") {
-        //         dark.style.display = "none";
-        //         lighted.style.display = "block";
-        //         console.log("Light")
-        //     }
-        // }
-
-        // function darked() {
-        //     if (event.type == "mouseleave") {
-        //         dark.style.display = "block";
-        //         lighted.style.display = "none";
-        //         console.log("Dark")
-        //     }
-        // }
-
-        // points.forEach(pointItem => {
-        //     pointItem.addEventListener("mouseenter", light);
-        //     pointItem.addEventListener("mouseleave", darked);
-
-        // })
-
-        // leftMenu.addEventListener("mouseenter", function(event) {
-        //         if (event.target.closest('.menu-point')) {
-        //             console.log("Works")
-        //         } else {
-        //             console.log("LOX")
-        //         }
-        //     })
-        // function check(event) {
-        //     if (event.type == "mouseenter") {
-        //         dark.style.display = "none";
-        //         lighted.style.display = "block";
-        //         console.log(event.target)
-        //     } else if (event.type == "mouseleave") {
-        //         lighted.style.display = "none";
-        //         dark.style.display = "block";
-        //     }
-        // }
-
-        // menPoint.forEach(pointItem => {
-        //     menPoint.addEventListener("mouseenter", check);
-
-        // })
+       
     </script>
 </body>
 

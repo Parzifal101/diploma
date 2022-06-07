@@ -39,25 +39,6 @@
                 </div>
                 <h3><?= $_SESSION['user']['name']?> <?= $_SESSION['user']['surname']?></h3>
                 <p>Должность</p>
-                <!-- <div class="change-arrows">
-                <button onclick="showDrop('drop-menu')" id="drop-btn"><img src="img/arrows.svg" alt=""></a></button>
-            </div>
-            <div id="drop-menu" class="dropdown ">
-                <div class="dropdown-wrapper">
-                    <div class="change-company drop-company">
-                        <div class="change-img-wrapper ">
-                            <img src="img/avatars/jorik.jpg " alt=" ">
-                        </div>
-                        <h3>Yandex</h3>
-                    </div>
-                    <div class="change-company drop-company">
-                        <div class="change-img-wrapper ">
-                            <img src="img/avatars/jorik.jpg " alt=" ">
-                        </div>
-                        <h3>Company Name</h3>
-                    </div>
-                </div>
-            </div> -->
             </div>
     </header>
     <main>
