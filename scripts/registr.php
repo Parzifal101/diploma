@@ -40,6 +40,7 @@
     ];
     print_r ($_SESSION['user']);
     header('Location: /create_company.php');
+    unset($_SESSION['message']);
 }else{
     $_SESSION['message'] = "Пароли не совпадают";
     header('Location: /reg.php');

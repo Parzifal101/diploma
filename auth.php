@@ -1,9 +1,9 @@
 <?php
-    session_start();
+session_start();
 
-    if(!empty($_SESSION['user'])){
-        header('Location: /cabinet.php');
-    }
+if (!empty($_SESSION['user'])) {
+    header('Location: /cabinet.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,9 +53,17 @@
                             <input placeholder="Логин" type="text" name="login">
                             <input placeholder="Пароль" type="password" name="password">
                             <a href="">Забыли пароль?</a>
+                            <div class="err-msg">
+                                <?php
+                                if (!empty($_SESSION['message'])) {
+                                    echo $_SESSION['message'];
+                                }
+                                ?>
+                            </div>
                             <button>Войти</button>
                         </form>
                     </div>
+
                     <div class="fed-low">
                         <p>Я даю свое согласие на обработку, хранение и использование своих персональных данных на основании <a href="">ФЗ № 152-ФЗ «О персональных данных» от 27.07.2006 г.</a></p>
                     </div>

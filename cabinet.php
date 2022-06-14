@@ -34,7 +34,7 @@ if (empty($_SESSION['user'])) {
         </div>
         <div class="small-profile">
             <div class="small-profile-img-wrap">
-                <img src="img/avatars/jorik.jpg" alt="">
+                <img src="img/avatars/<?= $_SESSION['user']['icon'] ?>" alt="">
             </div>
             <h3><?= $_SESSION['user']['name'] ?> <?= $_SESSION['user']['surname'] ?></h3>
             <p>Должность</p>
@@ -47,7 +47,7 @@ if (empty($_SESSION['user'])) {
             </div>
             <div class="change-company">
                 <div class="change-img-wrapper">
-                    <img src="img/avatars/jorik.jpg" alt="">
+                    <img src="img/avatars/<?= $_SESSION['user']['icon'] ?>" alt="">
                 </div>
                 <h3><?php echo ($_SESSION['user']['company_name']) ?></h3>
 
@@ -117,7 +117,7 @@ if (empty($_SESSION['user'])) {
                             <img class="dark" src="img/icons/ci_settings-filled.svg" alt="">
                             <img style="display: none;" class="lighted" src="img/icons/ci_settings-filled-1.svg" alt="">
                         </div>
-                        <a href="settings.html">Настройки</a>
+                        <a href="settings.php">Настройки</a>
                     </div>
                 </li>
                 <div class="logout">
@@ -156,7 +156,7 @@ if (empty($_SESSION['user'])) {
                 while ($company_info = $statement_2->fetch()) {
                 ?>
                     <div class="company-info-left">
-                        <p><?php print_r($company_info['description']) ?></p>
+                        <p><?php print_r(mb_substr($company_info['description'],0,160,'UTF-8')) ?></p>
                     </div>
                     <hr>
                     <div class="company-info-right">
@@ -177,6 +177,24 @@ if (empty($_SESSION['user'])) {
                 }
                 ?>
             </div>
+            <div id="pop-wrapperChart">
+                <div class="close2">
+                    <button onclick="closeDropFlex('pop-wrapperChart')"><img src="img/icons/cross.png" alt=""></button>
+                </div>
+                <div id="chart-wrapper">
+
+
+                    <canvas class="chart" id="myChart" width="400" height="400"></canvas>
+
+
+                    <canvas class="chart" id="myChart2" width="400" height="400"></canvas>
+                    <canvas class="chart" id="myChart3" width="400" height="400"></canvas>
+
+                </div>
+            </div>
+            <div>
+
+            </div>
             <div id="pop-wrapper" class="pop-wrapper">
                 <div class="pop-up-add">
                     <h2>Добавить рекламную кампанию</h2>
@@ -185,7 +203,7 @@ if (empty($_SESSION['user'])) {
                     </div>
                     <div class="info-filter">
                         <form action="scripts/add.php" method="post" enctype="multipart/form-data">
-                            
+
                             <input placeholder="Заголовок рекламной кампании" name="title" type="text">
                             <textarea placeholder="Текст вашей рекламной кампании" name="text" id="" cols="30" rows="10"></textarea>
                             <input id="file-inp" name="pic" type="file">
@@ -194,6 +212,9 @@ if (empty($_SESSION['user'])) {
                     </div>
                 </div>
             </div>
+
+
+
             <div class="info-area">
                 <h1><?php echo ($_SESSION['user']['company_name']) ?></h1>
                 <div class="status-menu">
@@ -208,7 +229,7 @@ if (empty($_SESSION['user'])) {
                     <button onclick="showDropFlex('pop-wrapper')">Создать</button>
                 </div>
                 <div class="posts-table">
-                    <table>
+                    <table id="vab">
                         <thead>
                             <td>Статус</td>
                             <td>Наименование</td>
@@ -225,18 +246,19 @@ if (empty($_SESSION['user'])) {
                         ?>
                             <tr>
                                 <td><?php print_r($company_posts['status']) ?></td>
-                                <td><?php print_r($company_posts['title']) ?></td>
-                                <td><?php print_r($company_posts['views']) ?></td>
-                                <td><?php print_r($company_posts['likes']) ?></td>
-                                <td><?php print_r($company_posts['comment_id']) ?></td>
+                                <td class="tabpost-title"><?php print_r(mb_substr($company_posts['title'], 0, 35, 'UTF-8')) ?></td>
+                                <td class="tabpost-view"><?php print_r($company_posts['views']) ?></td>
+                                <td class="tabpost-like"><?php print_r($company_posts['likes']) ?></td>
+                                <td class="tabpost-comment"><?php print_r($company_posts['comment']) ?></td>
                                 <form action="scripts/delete_post.php" method="post">
                                     <input type="text" name="id" value="<?php print_r($company_posts['id']) ?>" hidden />
                                     <td>
                                         <button>Удалить</button>
-                                        <!-- <button>Статистика</button>
-                                        <button>Редактировать</button> -->
-                                    </td>
                                 </form>
+                                <button onclick="showDropFlex('pop-wrapperChart')">Статистика</button>
+                                <!-- <button>Редактировать</button> -->
+                                </td>
+
                             </tr>
                         <?php
                         }
@@ -246,14 +268,15 @@ if (empty($_SESSION['user'])) {
             </div>
 
         </div>
+        <?php
 
+        ?>
     </main>
     <footer>
 
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        
-
         function showDrop(element) {
             if (document.getElementById(element)) {
                 let dropMenu = document.getElementById(element);
@@ -275,6 +298,7 @@ if (empty($_SESSION['user'])) {
                 }
             } else alert('Error')
         }
+
         function closeDropFlex(element) {
             if (document.getElementById(element)) {
                 let dropMenu = document.getElementById(element);
@@ -285,20 +309,100 @@ if (empty($_SESSION['user'])) {
                 }
             } else alert('Error')
         }
-        let count = document.getElementById('count');
-        const link = document.getElementById('linkView');
 
-        link.forEach(linkItem => {
-            linkItem.addEventListener("click", counter)
+
+
+
+        // function fTableToArray() {
+        //     aTable = [...document.getElementById('vab').rows].map((tr) => {
+        //         return [...tr.cells].map((td) => td.textContent);
+        //     });
+
+        //     console.log(aTable[1][3]); 
+        // }
+
+        // console.log(fTableToArray())
+
+        let titles = [...document.querySelectorAll('.tabpost-title')].map(td => td.textContent)
+        let views = [...document.querySelectorAll('.tabpost-view')].map(td => td.textContent)
+        let likes = [...document.querySelectorAll('.tabpost-like')].map(td => td.textContent)
+        let comments = [...document.querySelectorAll('.tabpost-comment')].map(td => td.textContent)
+        
+
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        ctx.canvas.parentNode.style.height = '280px'
+        ctx.canvas.parentNode.style.width = '420px'
+        ctx.canvas.parentNode.style.display = 'inline-flex'
+        
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [titles[0], titles[1], titles[2]],
+                datasets: [{
+                    label: "Просмотры",
+                    data: [views[0], views[1], views[2]],
+                    backgroundColor: ['white'],
+                    borderColor: [
+                        '#424ebb',
+                        '#5480d1',
+                        '#54aed1',
+                        '#54d1d1',
+                        '#54d1b2'
+                    ],
+
+                    borderWidth: 4,
+                }]
+            },
+            options: {}
         })
-
-        function counter(event) {
-            if (event.type == "click") {
-                count.innerHTML += 1;
-            }
-        }
-       
+        const ctx2 = document.getElementById('myChart2').getContext('2d');
+        console.log(ctx)
+        const myChart2 = new Chart(ctx2, {
+            type: 'polarArea',
+            data: {
+                labels: [titles[0], titles[1], titles[2]],
+                datasets: [{
+                    label: "Просмотры",
+                    data: [likes[0],likes[1],likes[2]],
+                    backgroundColor: ['white'],
+                    borderColor: [
+                        '#424ebb',
+                        '#5480d1',
+                        '#54aed1',
+                        '#54d1d1',
+                        '#54d1b2'
+                    ],
+                    borderWidth: 4,
+                }]
+            },
+            options: {}
+        })
+        const ctx3 = document.getElementById('myChart3').getContext('2d');
+        console.log(ctx)
+        const myChart3 = new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ["Все время", "Сегодня"],
+                datasets: [{
+                    label: "Просмотры",
+                    data: [comments[0], comments[1]],
+                    backgroundColor: ['#ccd1ff','#569ca1'],
+                    borderColor: [
+                        '#424ebb',
+                        '#5480d1',
+                        '#54aed1',
+                        '#54d1d1',
+                        '#54d1b2'
+                    ],
+                    borderWidth: 4,
+                }]
+            },
+            options: {}
+        })
     </script>
+
+
 </body>
 
 </html>

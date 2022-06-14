@@ -45,8 +45,9 @@
         print_r($_SESSION['user']);
         print_r($company);
         header('Location: /cabinet.php');
+        unset($_SESSION['message']);
     }else {
-        echo 'Логин или пароль не верный или пользователь не существует';
+        $_SESSION['message'] = 'Логин или пароль не верный';
         header('Location: /auth.php');
     }
 ?>

@@ -214,7 +214,7 @@
                                 <img src="img/icons/view-icon.svg" alt="">
                             </div>
                             <div class="views-count">
-                                <p><span id="count">200 345</span> посмотрели эту запись</p>
+                                <p><span id="count"><?php echo $post['views'] ?></span> посмотрели эту запись</p>
                             </div>
                             <div class="post-likes">
                                 <div class="like" data-id="<?php echo $post['id'] ?>">
@@ -236,7 +236,7 @@
                         <div id="comment" class="comment">
                             <div class="comment-head">
                                 <div class="avatar-wrapper">
-                                    <img src="img/avatars/jorik.jpg" alt="">
+                                    <img src="img/avatars/<?= $_SESSION['user']['icon'] ?>" alt="">
                                 </div>
                                 <div class="user-info">
                                     <p><?php print_r($comments['user_name'])?></p>

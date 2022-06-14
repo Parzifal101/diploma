@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-wrapper">
                         <div class="quest">
-                            <h2>Первый раз? <a href="">Создайте аккаунт</a></h2>
+                            <h2>Уже зарегистрированы? <a href="auth.php">Войти!</a></h2>
                         </div>
                         <div class="welcome">
                             <h1>Добро пожаловать!</h1>
@@ -57,16 +57,15 @@
                                 <input placeholder="Подтвердите пароль" type="password" name="confirm_password">
                                 
                                 <a href="">Забыли пароль?</a>
-                                <button>Войти</button>
-                            </form>
-                            <div>
-                                <?php 
-                                    if(!empty($_SESSION['message'])){
-                                        echo '<p class="msg>'.$_SESSION['message'].'</p>';
-                                    } 
-                                    unset ($_SESSION['message'])
+                                <div class="err-msg">
+                                <?php
+                                if (!empty($_SESSION['message'])) {
+                                    echo $_SESSION['message'];
+                                }
                                 ?>
                             </div>
+                                <button>Войти</button>
+                            </form>
                         </div>
                     </div>
                     <div class="fed-low">

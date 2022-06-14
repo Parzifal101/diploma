@@ -1,9 +1,9 @@
 <?php
     session_start();
 
-    if(!empty($_SESSION['user'])){
-        header('Location: /cabinet.php');
-    }
+    // if(!empty($_SESSION['user'])){
+    //     header('Location: /cabinet.php');
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -46,13 +46,23 @@
                         <h1 style="font-size:24px">Регистрация компании</h1>
                     </div>
                     <div class="form-wrap">
-                        <form action="scripts/company_reg.php" method="post">
+                        <form action="scripts/company_reg.php" method="post" enctype="multipart/form-data">
                             <input placeholder="Название" type="text" name="company_name">
                             <input placeholder="Контактный телефон" type="text" name="company_phone">
                             <input placeholder="Местоположение" type="text" name="company_location">
                             <input placeholder="ИНН" type="text" name="company_inn">
                             <textarea placeholder="Описание" name="description" cols="30" rows="10"></textarea>
+                            
+                            <input  id="head-file" name="header" type="file">
+                            <label class="ch-lb-header" for="header">Выберите шапку</label>
                             <a href="">Забыли пароль?</a>
+                            <div class="err-msg">
+                                <?php
+                                if (!empty($_SESSION['message'])) {
+                                    echo $_SESSION['message'];
+                                }
+                                ?>
+                            </div>
                             <button>Войти</button>
                         </form>
                     </div>

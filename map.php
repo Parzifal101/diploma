@@ -35,7 +35,7 @@
             </div>
             <div class="small-profile">
                 <div class="small-profile-img-wrap">
-                    <img src="img/avatars/jorik.jpg" alt="">
+                    <img src="img/avatars/<?= $_SESSION['user']['icon'] ?>" alt="">
                 </div>
                 <h3><?= $_SESSION['user']['name']?> <?= $_SESSION['user']['surname']?></h3>
                 <p>Должность</p>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="change-company">
                     <div class="change-img-wrapper">
-                        <img src="img/avatars/jorik.jpg" alt="">
+                        <img src="img/avatars/<?= $_SESSION['user']['icon'] ?>" alt="">
                     </div>
                     <h3><?php echo($_SESSION['user']['company_name'])?></h3>
 
@@ -139,7 +139,7 @@
                                 <img class="dark" src="img/icons/ci_settings-filled.svg" alt="">
                                 <img style="display: none;" class="lighted" src="img/icons/ci_settings-filled-1.svg" alt="">
                             </div>
-                            <a href="settings.html">Настройки</a>
+                            <a href="settings.php">Настройки</a>
                         </div>
                     </li>
                     <div class="logout">

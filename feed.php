@@ -1,7 +1,7 @@
 <?php
     require 'config.php';
     session_start();
-    if(!empty($_SESSION['user'])){
+    if(empty($_SESSION['user'])){
         header('Location: /cabinet.php');
     }
 ?>
@@ -33,9 +33,11 @@
                 <button type="submit">Найти</button>
             </form>
         </div>
+        
         <div class="small-profile">
             <div class="small-profile-img-wrap">
-                <img src="img/avatars/jorik.jpg" alt="">
+               
+                <img src="img/avatars/<?= $_SESSION['user']['icon'] ?>" alt="">
             </div>
             <h3><?= $_SESSION['user']['name'] ?> <?= $_SESSION['user']['surname'] ?></h3>
             <p>Должность</p>
@@ -48,7 +50,7 @@
             </div>
             <div class="change-company">
                 <div class="change-img-wrapper">
-                    <img src="img/avatars/jorik.jpg" alt="">
+                    <img src="img/avatars/<?= $_SESSION['user']['icon'] ?>" alt="">
                 </div>
                 <h3><?php echo ($_SESSION['user']['company_name']) ?></h3>
 
@@ -103,9 +105,12 @@
                             <img class="dark" src="img/icons/ci_settings-filled.svg" alt="">
                             <img style="display: none;" class="lighted" src="img/icons/ci_settings-filled-1.svg" alt="">
                         </div>
-                        <a href="settings.html">Настройки</a>
+                        <a href="settings.php">Настройки</a>
                     </div>
                 </li>
+                <div class="logout">
+                    <a href="scripts/logout.php">Выход</a>
+                </div>
             </ul>
         </nav>
         <div class="feed-area">
@@ -163,17 +168,19 @@
                     </div>
 
                     <div class="post-text">
-                        <a id="linkView" href="post.php?id=<?= $row->id?>">
+                        <a id="linkView"  href="post.php?id=<?= $row->id?>">
+                        <div class="view" data-id="<?php echo $row->id ?>">
                             <h1><?php echo $row->title ?></h1>
                             <span class="date"><?php echo $row->date ?></span>
                             <p><?php echo $row->text ?></p>
+                            </div>
                         </a>
                         <div class="post-views">
                             <div class="views-icon">
                                 <img src="img/icons/view-icon.svg" alt="">
                             </div>
                             <div class="views-count">
-                                <p><span id="count">200 345</span> посмотрели эту запись</p>
+                                <p><span class="counter"><?php echo $row->views ?></span> посмотрели эту запись</p>
                             </div>
                             <div class="post-likes">
                                 <div class="like" data-id="<?php echo $row->id ?>">
@@ -195,7 +202,7 @@
                         <div id="comment" class="comment">
                             <div class="comment-head">
                                 <div class="avatar-wrapper">
-                                    <img src="img/avatars/jorik.jpg" alt="">
+                                    <img src="img/avatars/<?= $_SESSION['user']['icon'] ?>" alt="">
                                 </div>
                                 <div class="user-info">
                                     <p><?php print_r($comments['user_name'])?></p>
@@ -281,6 +288,26 @@
                 success: function(result) {
                     if (!result.error){ 
                         link.addClass('active'); 
+                        $('.counter',link).html(result.count);
+                    }else{
+                        alert(result.message);
+                    }
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $(".view").bind("click", function() {
+            var link = $(this);
+            var id = link.data('id');
+            $.ajax({
+                url: "scripts/view.php",
+                type: "POST",
+                data: {id:id}, 
+                dataType: "json",
+                success: function(result) {
+                    if (!result.error){ 
                         $('.counter',link).html(result.count);
                     }else{
                         alert(result.message);

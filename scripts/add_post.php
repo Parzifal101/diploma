@@ -18,6 +18,9 @@
     
     $query->execute();
 
+    $query = $pdo->prepare("UPDATE post SET comment = comment+1  WHERE id = :id");
+    $query->execute(array(':id'=>$post_id));
+
     header('Location: ../post.php?id='.$post_id);
 
 ?>
